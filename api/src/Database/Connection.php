@@ -34,7 +34,7 @@ class Connection
             'dbname' => 'contactsystem',
             'user' => 'postgres',
             'password' => 'postgres',
-            'host' => 'localhost',
+            'host' => 'postgres',
             'port' => 5432,
             'driver' => 'pgsql'
         ], $config);
