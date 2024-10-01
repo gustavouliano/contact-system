@@ -24,4 +24,32 @@ class PersonRepository
         Connection::getInstance()->getEntityManager()->flush();
         return $person;
     }
+
+    public function update(int $id, ?string $name, ?string $cpf): ?PersonModel
+    {
+        $person = Connection::getInstance()->getEntityManager()->find(PersonModel::class, $id);
+        if (!$person) {
+            return null;
+        }
+        if ($name !== null) {
+            $person->setName($name);
+        }
+        if ($cpf !== null) {
+            $person->setCpf($cpf);
+        }
+        Connection::getInstance()->getEntityManager()->flush();
+        return $person;
+    }
+
+    public function delete(int $id): bool
+    {
+        $entityManager = Connection::getInstance()->getEntityManager();
+        $person = $entityManager->find(PersonModel::class, $id);
+        if (!$person) {
+            return false;
+        }
+        $entityManager->remove($person);
+        $entityManager->flush();
+        return true;
+    }
 }

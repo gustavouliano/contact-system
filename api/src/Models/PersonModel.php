@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping\OneToMany;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'person')]
-class PersonModel
+class PersonModel extends Model
 {
 
     #[ORM\Id]
