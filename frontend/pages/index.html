@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <div class="list-container">
+    <div class="table-container">
         <h1>Lista de Pessoas</h1>
         <table class="table">
             <thead>
@@ -60,7 +60,7 @@
                         personList.appendChild(tr);
                     });
                 })
-                .catch(error => console.error('Houve um problema com a requisição Fetch:', error));
+                .catch(error => console.error('Houve um problema com a requisição:', error));
         }
 
         window.onload = fetchPersons;
