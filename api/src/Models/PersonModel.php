@@ -23,6 +23,7 @@ class PersonModel extends Model
     #[ORM\Column(type: 'string')]
     private string $cpf;
 
+    /** @var Collection<int, ContactModel> */
     #[OneToMany(targetEntity: ContactModel::class, mappedBy: 'personModel')]
     private Collection $contactModels;
 
@@ -31,12 +32,12 @@ class PersonModel extends Model
         $this->contactModels = new ArrayCollection();
     }
 
-    public function getId(): string
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function setId(string $id): void
+    public function setId(int $id): void
     {
         $this->id = $id;
     }
@@ -69,5 +70,6 @@ class PersonModel extends Model
     public function addContactModel(ContactModel $contactModel): void
     {
         $this->contactModels[] = $contactModel;
+        $contactModel->setPersonModel($this);
     }
 }

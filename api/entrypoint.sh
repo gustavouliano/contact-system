@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Aguardar até que o PostgreSQL esteja pronto
-sleep 35
+sleep 15
 
 php bin/doctrine.php orm:schema-tool:create
 

@@ -17,7 +17,7 @@ class ContactModel extends Model
     private int $id;
 
     #[ORM\Column(type: 'boolean')]
-    private string $type;
+    private bool $type;
 
     #[ORM\Column(type: 'string')]
     private string $description;
@@ -26,12 +26,12 @@ class ContactModel extends Model
     #[JoinColumn(name: 'idPerson', referencedColumnName: 'id')]
     private PersonModel $personModel;
 
-    public function getId(): string
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function setId(string $id)
+    public function setId(int $id)
     {
         $this->id = $id;
     }

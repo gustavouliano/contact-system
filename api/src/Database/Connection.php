@@ -28,6 +28,7 @@ class Connection
         $connection = new Connection();
         $config = ORMSetup::createAttributeMetadataConfiguration(
             paths: [__DIR__ . '/../Models'],
+            isDevMode: true
         );
 
         $doctrineConnection = DriverManager::getConnection([

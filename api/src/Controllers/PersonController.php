@@ -2,10 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\PersonModel;
 use App\Repositories\PersonRepository;
-use App\Views\View;
-use Pecee\Http\Request;
 use Pecee\SimpleRouter\SimpleRouter;
 
 class PersonController
@@ -44,7 +41,6 @@ class PersonController
     public function delete(int $id)
     {
         $this->repository->delete($id);
-        SimpleRouter::response()->httpCode(204);
         return true;
     }
 
