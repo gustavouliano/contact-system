@@ -25,7 +25,7 @@ export default function Page() {
 
   return (
     <div className="flex flex-col mx-auto w-4/6 mt-4 gap-4 items-center">
-      <h1 className="text-2xl">Editar Pessoa ID: {id}</h1>
+      <h1 className="text-2xl">Editar pessoa ID: {id}</h1>
       <form onSubmit={handleSubmit} className="w-full">
         <div className="mb-3">
           <label htmlFor="type" className="form-label">
@@ -56,7 +56,7 @@ export default function Page() {
           />
         </div>
         <button type="submit" className="btn btn-success">
-          Atualizar Contato
+          Atualizar contato
         </button>
       </form>
     </div>

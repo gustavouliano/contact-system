@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Repositories\ContactRepository;
+use Error;
 use Pecee\SimpleRouter\SimpleRouter;
 
 class ContactController
@@ -24,7 +25,8 @@ class ContactController
     public function create(int $personId, bool $type, string $description)
     {
         if (!$personId || !$description) {
-            return SimpleRouter::response()->httpCode(400);
+            SimpleRouter::response()->httpCode(400);
+            throw new Error('PersonId or Description field has null value.');
         }
         $contact = $this->repository->create($type, $description, $personId);
         SimpleRouter::response()->httpCode(201);
@@ -49,7 +51,7 @@ class ContactController
         foreach ($contactModel as $contact) {
             $contacts[] = [
                 'id' => $contact->getId(),
-                'type' => $contact->getType() == true ? '1' : '0',
+                'type' => $contact->getType() == true,
                 'description' => $contact->getDescription(),
             ];
         }

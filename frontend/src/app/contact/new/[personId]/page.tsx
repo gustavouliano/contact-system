@@ -30,7 +30,7 @@ export default function Page({ params }) {
   return (
     <div className="flex flex-col mx-auto w-4/6 mt-4 gap-4 items-center">
       <h1 className="text-2xl">
-        Adicionar novo contato para Pessoa ID: {params.personId}
+        Adicionar novo contato para pessoa ID: {params.personId}
       </h1>
       <form onSubmit={handleSubmit} className="w-full">
         <div className="mb-3">
@@ -62,7 +62,7 @@ export default function Page({ params }) {
           />
         </div>
         <button type="submit" className="btn btn-success">
-          Adicionar Contato
+          Adicionar contato
         </button>
       </form>
     </div>

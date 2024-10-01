@@ -41,7 +41,7 @@ export default function Home() {
     <div className="flex flex-col mx-auto w-4/6 mt-4 gap-4 items-center">
       <h1 className="h2">Listagem de Pessoas</h1>
       <button className="btn btn-success mb-3" onClick={onCreate}>
-        Criar Nova Pessoa
+        Criar nova pessoa
       </button>
       <PersonTable
         persons={persons}

@@ -39,7 +39,7 @@ export default function Page({ params }) {
   return (
     <div className="flex flex-col mx-auto w-4/6 mt-4 gap-4 items-center">
       <h1 className="h2">
-        Listagem de Contatos da Pessoa ID: {params.personId}
+        Listagem de contatos da pessoa ID: {params.personId}
       </h1>
       <button className="btn btn-success mb-3" onClick={onCreate}>
         Adicionar contato

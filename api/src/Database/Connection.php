@@ -32,11 +32,11 @@ class Connection
         );
 
         $doctrineConnection = DriverManager::getConnection([
-            'dbname' => 'contactsystem',
-            'user' => 'postgres',
-            'password' => 'postgres',
-            'host' => 'postgres',
-            'port' => 5432,
+            'dbname' => getenv('DATABASE_NAME', true) ?: getenv('DATABASE_NAME'),
+            'user' => getenv('DATABASE_USER', true) ?: getenv('DATABASE_USER'),
+            'password' => getenv('DATABASE_PASS', true) ?: getenv('DATABASE_PASS'),
+            'host' => getenv('DATABASE_HOST', true) ?: getenv('DATABASE_HOST'),
+            'port' => getenv('DATABASE_PORT', true) ?: getenv('DATABASE_PORT'),
             'driver' => 'pgsql'
         ], $config);
 

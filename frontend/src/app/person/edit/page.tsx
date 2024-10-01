@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { updatePerson } from "@/requests/persons-requests";
+import { validateCpf } from "@/util/cpf";
 
 export default function Page() {
   const [id, setId] = useState(0);
@@ -19,13 +20,17 @@ export default function Page() {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    if (!validateCpf(cpf)){
+        alert('CPF inválido');
+        return;
+    }
     await updatePerson(id, { name, cpf });
     router.push("/");
   };
 
   return (
     <div className="flex flex-col mx-auto w-4/6 mt-4 gap-4 items-center">
-      <h1 className="text-2xl">Editar Pessoa ID: {id}</h1>
+      <h1 className="text-2xl">Editar pessoa ID: {id}</h1>
       <form onSubmit={handleSubmit} className="w-full">
         <div className="mb-3">
           <label htmlFor="name" className="form-label">
@@ -54,7 +59,7 @@ export default function Page() {
           />
         </div>
         <button type="submit" className="btn btn-success">
-          Criar Pessoa
+          Atualizar pessoa
         </button>
       </form>
     </div>

@@ -82,6 +82,8 @@ SimpleRouter::delete('/contacts/{id}', function ($id) use ($contactController) {
     return $contactController->delete($id);
 });
 
-SimpleRouter::error(function (Request $request, \Exception $exception) {});
+SimpleRouter::error(function (Request $request, \Exception $exception) {
+    return json_encode(['error' => $exception->getMessage()]);
+});
 
 SimpleRouter::start();
