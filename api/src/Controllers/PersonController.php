@@ -40,18 +40,23 @@ class PersonController
 
     public function update(int $id, ?string $name, ?string $cpf)
     {
+        $person = $this->repository->findById($id);
+        if (!$person) {
+            SimpleRouter::response()->httpCode(400);
+            throw new Error('Person id does not exists.');
+        }
         if ($cpf && !$this->validateCpf($cpf)) {
             SimpleRouter::response()->httpCode(400);
             throw new Error('Invalid CPF');
         }
-        $person = $this->repository->update($id, $name, $cpf);
+        $person = $this->repository->update($person, $name, $cpf);
         return $this->getAsJson([$person]);
     }
 
     public function delete(int $id)
     {
         $this->repository->delete($id);
-        return true;
+        SimpleRouter::response()->httpCode(204);
     }
 
     private function validateCpf(string $cpf)

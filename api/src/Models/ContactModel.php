@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping\ManyToOne;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'contact')]
-class ContactModel extends Model
+class ContactModel
 {
 
     #[ORM\Id]

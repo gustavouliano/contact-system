@@ -24,25 +24,34 @@ class ContactController
 
     public function create(int $personId, bool $type, string $description)
     {
-        if (!$personId || !$description) {
+        if (strlen($description) < 3) {
             SimpleRouter::response()->httpCode(400);
-            throw new Error('PersonId or Description field has null value.');
+            throw new Error('Description must have more than 3 characters.');
         }
         $contact = $this->repository->create($type, $description, $personId);
+        if (!$contact) {
+            SimpleRouter::response()->httpCode(500);
+            throw new Error('Error on contact create');
+        }
         SimpleRouter::response()->httpCode(201);
         return $this->getAsJson([$contact]);
     }
 
     public function update(int $id, ?bool $type, ?string $description)
     {
-        $contact = $this->repository->update($id, $type, $description);
+        $contact = $this->repository->findById($id);
+        if (!$contact) {
+            SimpleRouter::response()->httpCode(400);
+            throw new Error('Contact id does not exists.');
+        }
+        $contact = $this->repository->update($contact, $type, $description);
         return $this->getAsJson([$contact]);
     }
 
     public function delete(int $id)
     {
         $this->repository->delete($id);
-        return true;
+        SimpleRouter::response()->httpCode(204);
     }
 
     protected function getAsJson(array $contactModel): string

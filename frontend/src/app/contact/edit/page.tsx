@@ -6,6 +6,7 @@ import { updateContact } from "@/requests/contacts-requests";
 
 export default function Page() {
   const [id, setId] = useState(0);
+  const [personId, setPersonId] = useState(0);
   const [type, setType] = useState(0);
   const [description, setDescription] = useState("");
   const router = useRouter();
@@ -13,6 +14,7 @@ export default function Page() {
 
   useEffect(() => {
     setId(Number(searchParams.get("id")) ?? 0);
+    setPersonId(Number(searchParams.get("personId")) ?? 0);
     setType(Number(searchParams.get("type")) ?? 0);
     setDescription(searchParams.get("description") ?? "");
   }, []);
@@ -20,12 +22,12 @@ export default function Page() {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     await updateContact(id, { type: Boolean(type), description });
-    router.push(`/person/${id}`);
+    router.push(`/person/${personId}`);
   };
 
   return (
     <div className="flex flex-col mx-auto w-4/6 mt-4 gap-4 items-center">
-      <h1 className="text-2xl">Editar pessoa ID: {id}</h1>
+      <h1 className="text-2xl">Editar contato ID: {id}</h1>
       <form onSubmit={handleSubmit} className="w-full">
         <div className="mb-3">
           <label htmlFor="type" className="form-label">

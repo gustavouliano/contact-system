@@ -11,14 +11,18 @@ class ContactRepository
 
     public function findByPersonId(int $personId): array
     {
-        $entityManager = Connection::getInstance()->getEntityManager();
         $dql = "SELECT c, p FROM App\Models\ContactModel c JOIN c.personModel p WHERE p.id = :personId ORDER BY c.id";
-        $query = $entityManager->createQuery($dql);
+        $query = Connection::getInstance()->getEntityManager()->createQuery($dql);
         $query->setParameter('personId', $personId);
         return $query->getResult();
     }
 
-    public function create(bool $type, string $description, int $personId): ContactModel
+    public function findById(int $contactId): ?ContactModel
+    {
+        return Connection::getInstance()->getEntityManager()->find(ContactModel::class, $contactId);
+    }
+
+    public function create(bool $type, string $description, int $personId): ?ContactModel
     {
         $person = Connection::getInstance()->getEntityManager()->find(PersonModel::class, $personId);
         if (!$person) {
@@ -34,12 +38,8 @@ class ContactRepository
         return $contact;
     }
 
-    public function update(int $id, ?bool $type, ?string $description): ?ContactModel
+    public function update(ContactModel $contact, ?bool $type, ?string $description): ?ContactModel
     {
-        $contact = Connection::getInstance()->getEntityManager()->find(ContactModel::class, $id);
-        if (!$contact) {
-            return null;
-        }
         if ($type !== null) {
             $contact->setType($type);
         }
@@ -53,13 +53,12 @@ class ContactRepository
 
     public function delete(int $id): bool
     {
-        $entityManager = Connection::getInstance()->getEntityManager();
-        $contact = $entityManager->find(ContactModel::class, $id);
+        $contact = $this->findById($id);
         if (!$contact) {
             return false;
         }
-        $entityManager->remove($contact);
-        $entityManager->flush();
+        Connection::getInstance()->getEntityManager()->remove($contact);
+        Connection::getInstance()->getEntityManager()->flush();
         return true;
     }
 }

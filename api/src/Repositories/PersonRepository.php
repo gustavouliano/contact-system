@@ -15,6 +15,11 @@ class PersonRepository
         return $persons;
     }
 
+    public function findById(int $id): ?PersonModel
+    {
+        return Connection::getInstance()->getEntityManager()->find(PersonModel::class, $id);
+    }
+
     public function create(string $name, string $cpf): PersonModel
     {
         $person = new PersonModel();
@@ -25,12 +30,8 @@ class PersonRepository
         return $person;
     }
 
-    public function update(int $id, ?string $name, ?string $cpf): ?PersonModel
+    public function update(PersonModel $person, ?string $name, ?string $cpf): ?PersonModel
     {
-        $person = Connection::getInstance()->getEntityManager()->find(PersonModel::class, $id);
-        if (!$person) {
-            return null;
-        }
         if ($name !== null) {
             $person->setName($name);
         }

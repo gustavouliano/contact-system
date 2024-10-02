@@ -23,7 +23,7 @@ export default function Page({ params }) {
 
   const onEdit = (contact: Contact) => {
     router.push(
-      `/contact/edit?id=${contact.id}&type=${contact.type}&description=${contact.description}`
+      `/contact/edit?id=${contact.id}&type=${contact.type}&description=${contact.description}&personId=${params.personId}`
     );
   };
 

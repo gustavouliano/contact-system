@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping\OneToMany;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'person')]
-class PersonModel extends Model
+class PersonModel
 {
 
     #[ORM\Id]
@@ -24,7 +24,7 @@ class PersonModel extends Model
     private string $cpf;
 
     /** @var Collection<int, ContactModel> */
-    #[OneToMany(targetEntity: ContactModel::class, mappedBy: 'personModel')]
+    #[OneToMany(targetEntity: ContactModel::class, mappedBy: 'personModel', cascade: ['remove'])]
     private Collection $contactModels;
 
     public function __construct()
